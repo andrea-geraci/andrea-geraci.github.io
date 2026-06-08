@@ -221,7 +221,9 @@ p {
 }
 
 .pub-group + .pub-group {
-  margin-top: 1.2rem;
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #e3eaee;
 }
 
 .pub-group h3 {
