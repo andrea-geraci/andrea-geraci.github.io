@@ -2,10 +2,26 @@
   {
     "topic": "Heterogeneous latent factor models using horizontal kinships",
     "collaborators": [
-      "Ludovica Giua",
-      "Claudio Deiana",
-      "Gianluca Mazzarella",
-      "Marco Colagrossi"
+      {
+        "name": "Ludovica Giua",
+        "affiliation": "University of Sassari",
+        "url": "https://scholar.google.com/scholar?q=Ludovica+Giua"
+      },
+      {
+        "name": "Claudio Deiana",
+        "affiliation": "University of Cagliari",
+        "url": "https://scholar.google.com/scholar?q=Claudio+Deiana"
+      },
+      {
+        "name": "Gianluca Mazzarella",
+        "affiliation": "University of Pavia",
+        "url": "https://scholar.google.com/scholar?q=Gianluca+Mazzarella"
+      },
+      {
+        "name": "Marco Colagrossi",
+        "affiliation": "University of Cagliari",
+        "url": "https://scholar.google.com/scholar?q=Marco+Colagrossi"
+      }
     ],
     "description": "Methodological work on latent factor models and horizontal kinship structures.",
     "status": "Ongoing"
@@ -13,8 +29,16 @@
   {
     "topic": "Fascist-era municipal amalgamations and identity",
     "collaborators": [
-      "Claudio Deiana (University of Cagliari)",
-      "Marco Nieddu (University of Cagliari)"
+      {
+        "name": "Claudio Deiana",
+        "affiliation": "University of Cagliari",
+        "url": "https://scholar.google.com/scholar?q=Claudio+Deiana"
+      },
+      {
+        "name": "Marco Nieddu",
+        "affiliation": "University of Cagliari",
+        "url": "https://scholar.google.com/scholar?q=Marco+Nieddu"
+      }
     ],
     "description": "A project involving large-scale digitisation of historical documents, reconstruction of administrative boundaries, and the long-run role of local identity.",
     "status": "Ongoing"
@@ -22,9 +46,21 @@
   {
     "topic": "Land rights reform in Benin and village networks",
     "collaborators": [
-      "Daniele Fabbri (University of Bologna, PI)",
-      "Daniele Nosenzo (Copenhagen Business School)",
-      "Jonathan Schulz (George Mason University)"
+      {
+        "name": "Daniele Fabbri",
+        "affiliation": "University of Bologna (PI)",
+        "url": "https://scholar.google.com/scholar?q=Daniele+Fabbri"
+      },
+      {
+        "name": "Daniele Nosenzo",
+        "affiliation": "Copenhagen Business School",
+        "url": "https://scholar.google.com/scholar?q=Daniele+Nosenzo"
+      },
+      {
+        "name": "Jonathan Schulz",
+        "affiliation": "George Mason University",
+        "url": "https://scholar.google.com/scholar?q=Jonathan+Schulz"
+      }
     ],
     "description": "Ongoing work on the effects of a formal land rights reform in Benin on reconstructed village networks.",
     "status": "Ongoing"
@@ -32,9 +68,21 @@
   {
     "topic": "Textual analysis of Italian historical parliamentary speeches",
     "collaborators": [
-      "Gianluca Mazzarella (University of Pavia)",
-      "Sergio Galletta (Sapienza University of Rome)",
-      "Maruzia Di Buono (ETH Zurich)"
+      {
+        "name": "Gianluca Mazzarella",
+        "affiliation": "University of Pavia",
+        "url": "https://scholar.google.com/scholar?q=Gianluca+Mazzarella"
+      },
+      {
+        "name": "Sergio Galletta",
+        "affiliation": "Sapienza University of Rome",
+        "url": "https://scholar.google.com/scholar?q=Sergio+Galletta"
+      },
+      {
+        "name": "Maruzia Di Buono",
+        "affiliation": "ETH Zurich",
+        "url": "https://scholar.google.com/scholar?q=Maruzia+Di+Buono"
+      }
     ],
     "description": "A project using textual analysis of Italian historical parliamentary speeches.",
     "status": "Ongoing"

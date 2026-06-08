@@ -209,13 +209,35 @@ function normalizeManualProjects(data) {
     return [];
   }
 
+  const normalizeCollaborator = (item) => {
+    if (typeof item === "string") {
+      return {
+        name: item.trim(),
+        affiliation: "",
+        url: "",
+      };
+    }
+
+    if (!item || typeof item !== "object") {
+      return null;
+    }
+
+    return {
+      name: String(item.name || "").trim(),
+      affiliation: String(item.affiliation || "").trim(),
+      url: String(item.url || "").trim(),
+    };
+  };
+
   return data
     .map((item) => ({
       topic: (item.topic || "").trim(),
       description: (item.description || "").trim(),
       status: (item.status || "").trim(),
       collaborators: Array.isArray(item.collaborators)
-        ? item.collaborators.map((c) => String(c).trim()).filter(Boolean)
+        ? item.collaborators
+            .map(normalizeCollaborator)
+            .filter((c) => c && c.name)
         : [],
     }))
     .filter((item) => item.topic || item.description);
@@ -317,7 +339,16 @@ function renderCurrentProjects(entries, manualProjects) {
 
   const manualItems = manualProjects
     .map((project) => {
-      const collaborators = project.collaborators.join(", ");
+      const collaborators = project.collaborators
+        .map((person) => {
+          const label = person.affiliation
+            ? `${person.name} (${person.affiliation})`
+            : person.name;
+          return person.url
+            ? `<a href="${person.url}" target="_blank" rel="noopener noreferrer">${label}</a>`
+            : label;
+        })
+        .join(", ");
       return `
         <li>
           <span class="project-title">${project.topic}</span>
