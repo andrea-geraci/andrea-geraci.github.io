@@ -202,6 +202,48 @@ a {
   color: #0c455b;
 }
 
+.themes-panel {
+  padding-top: 1.55rem;
+  padding-bottom: 1.55rem;
+}
+
+.themes-intro {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.themes-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.7rem;
+  align-items: baseline;
+}
+
+.theme-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.22rem 0.72rem;
+  background: #eef4f7;
+  color: #214051;
+  line-height: 1.1;
+}
+
+.theme-lg {
+  font-size: 1.24rem;
+  font-weight: 600;
+}
+
+.theme-md {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.theme-sm {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
 .pub-list {
   margin: 0;
   padding-left: 1.2rem;
