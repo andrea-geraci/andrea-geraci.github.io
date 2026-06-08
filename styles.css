@@ -54,7 +54,7 @@ body {
   position: sticky;
   top: 1rem;
   align-self: start;
-  background: linear-gradient(165deg, #ffffff 0%, #eef6f8 100%);
+  background: linear-gradient(165deg, #ffffff 0%, #f4f9fb 100%);
   border: 1px solid #cfe0e6;
   border-radius: 20px;
   box-shadow: var(--shadow);
