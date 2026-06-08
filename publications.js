@@ -16,6 +16,68 @@ function splitAuthors(authorField) {
     });
 }
 
+function formatAuthorAPA(authorName) {
+  const trimmed = authorName.trim();
+  if (!trimmed) {
+    return "";
+  }
+
+  let surname = "";
+  let givenNames = "";
+
+  if (trimmed.includes(",")) {
+    const parts = trimmed.split(",").map((part) => part.trim()).filter(Boolean);
+    surname = parts[0] || "";
+    givenNames = parts.slice(1).join(" ");
+  } else {
+    const parts = trimmed.split(/\s+/).filter(Boolean);
+    surname = parts.length > 1 ? parts[parts.length - 1] : parts[0] || "";
+    givenNames = parts.slice(0, -1).join(" ");
+  }
+
+  const initials = givenNames
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((name) => `${name[0].toUpperCase()}.`)
+    .join(" ");
+
+  return initials ? `${surname}, ${initials}` : surname;
+}
+
+function formatAuthorsAPA(authorField) {
+  if (!authorField) {
+    return "";
+  }
+
+  const formatted = authorField
+    .split(/\s+and\s+/i)
+    .map((name) => formatAuthorAPA(name))
+    .filter(Boolean);
+
+  if (formatted.length === 0) {
+    return "";
+  }
+
+  if (formatted.length === 1) {
+    return formatted[0];
+  }
+
+  if (formatted.length === 2) {
+    return `${formatted[0]} & ${formatted[1]}`;
+  }
+
+  return `${formatted.slice(0, -1).join(", ")}, & ${formatted[formatted.length - 1]}`;
+}
+
+function ensureTrailingPeriod(text) {
+  const trimmed = (text || "").trim();
+  if (!trimmed) {
+    return "";
+  }
+
+  return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
+}
+
 function cleanValue(value) {
   return value
     .replace(/^\{+|\}+$/g, "")
@@ -95,6 +157,7 @@ function parseBibEntry(entryText) {
     type: entryType,
     key: entryKey,
     title: fields.title || "Untitled",
+    rawAuthors: fields.author || "",
     authors: splitAuthors(fields.author),
     journal: fields.journal || fields.booktitle || "",
     year: Number.parseInt(fields.year || "0", 10) || 0,
@@ -126,24 +189,6 @@ function parseBibTex(content) {
   return entries.sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
 }
 
-function makePublicationLine(pub) {
-  const where = [];
-  if (pub.journal) {
-    where.push(pub.journal);
-  }
-  if (pub.volume) {
-    where.push(`vol. ${pub.volume}${pub.number ? `(${pub.number})` : ""}`);
-  }
-  if (pub.pages) {
-    where.push(`pp. ${pub.pages}`);
-  }
-  if (pub.year) {
-    where.push(String(pub.year));
-  }
-
-  return where.join(", ");
-}
-
 function publicationCategory(pub) {
   if (pub.keywords.includes("journal")) {
     return "journal";
@@ -173,16 +218,36 @@ function renderPublications(entries) {
   const renderList = (items) =>
     items
     .map((entry) => {
-      const authors = entry.authors.join(", ");
+      const authorsApa = formatAuthorsAPA(entry.rawAuthors);
+      const yearPart = entry.year ? `(${entry.year}).` : "(n.d.).";
+      const titlePart = ensureTrailingPeriod(entry.title);
+      const sourceParts = [];
+
+      if (entry.journal) {
+        sourceParts.push(`<span class="pub-journal">${entry.journal}</span>`);
+      }
+      if (entry.volume) {
+        sourceParts.push(
+          `<span class="pub-volume">${entry.volume}</span>${entry.number ? `(${entry.number})` : ""}`
+        );
+      }
+      if (entry.pages) {
+        sourceParts.push(entry.pages);
+      }
+
+      const sourcePart = sourceParts.length ? `${sourceParts.join(", ")}.` : "";
       const doi = entry.doi
-        ? `<a href=\"https://doi.org/${entry.doi}\" target=\"_blank\" rel=\"noopener noreferrer\">DOI</a>`
+        ? `<a href="https://doi.org/${entry.doi}" target="_blank" rel="noopener noreferrer">https://doi.org/${entry.doi}</a>`
         : "";
 
       return `
         <li>
-          <span class="pub-title">${entry.title}</span>
-          <span class="pub-meta">${authors}</span>
-          <span class="pub-meta">${makePublicationLine(entry)}</span>
+          <p class="apa-entry">
+            ${authorsApa ? `<span class="apa-authors">${authorsApa}</span> ` : ""}
+            <span class="apa-year">${yearPart}</span>
+            <span class="apa-title"> ${titlePart}</span>
+            ${sourcePart ? `<span class="apa-source"> ${sourcePart}</span>` : ""}
+          </p>
           ${doi ? `<span class="pub-links">${doi}</span>` : ""}
         </li>
       `;

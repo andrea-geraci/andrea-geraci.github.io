@@ -189,6 +189,23 @@ p {
   margin-bottom: 1rem;
 }
 
+.apa-entry {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.apa-authors,
+.apa-year,
+.apa-title,
+.apa-source {
+  color: var(--ink);
+}
+
+.pub-journal,
+.pub-volume {
+  font-style: italic;
+}
+
 .pub-title {
   display: block;
   font-weight: 600;
@@ -219,15 +236,15 @@ p {
 
 .pub-links {
   display: inline-flex;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
 }
 
 .pub-links a {
   text-decoration: none;
   border: 1px solid #bbd0d9;
   border-radius: 999px;
-  padding: 0.1rem 0.5rem;
-  font-size: 0.86rem;
+  padding: 0.16rem 0.6rem;
+  font-size: 0.82rem;
 }
 
 .teaching-grid {
