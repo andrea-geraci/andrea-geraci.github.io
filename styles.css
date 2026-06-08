@@ -54,8 +54,8 @@ body {
   position: sticky;
   top: 1rem;
   align-self: start;
-  background: linear-gradient(165deg, #f7fbfc 0%, #dceff4 100%);
-  border: 1px solid #94b9c5;
+  background: linear-gradient(165deg, #ffffff 0%, #eef6f8 100%);
+  border: 1px solid #cfe0e6;
   border-radius: 20px;
   box-shadow: var(--shadow);
   padding: 1.6rem;
@@ -75,8 +75,8 @@ body {
   display: block;
   object-fit: cover;
   object-position: center 24%;
-  border: 3px solid #7daab8;
-  box-shadow: 0 10px 24px rgba(10, 93, 122, 0.18);
+  border: 2px solid #d6e5ec;
+  box-shadow: 0 8px 18px rgba(26, 40, 50, 0.14);
 }
 
 h1,
@@ -94,12 +94,12 @@ h1 {
 h2 {
   margin: 0.2rem 0 1rem;
   font-size: 2.1rem;
-  color: #0a546c;
+  color: #114d62;
 }
 
 .role {
   margin: 0;
-  color: #084c62;
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -118,12 +118,12 @@ nav ul {
   list-style: none;
   padding: 0;
   margin: 1.4rem 0 1.1rem;
-  border-top: 1px solid #9dbfc9;
-  border-bottom: 1px solid #9dbfc9;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 nav li + li {
-  border-top: 1px dashed #b7cfd6;
+  border-top: 1px dashed var(--line);
 }
 
 nav a {
@@ -151,9 +151,9 @@ nav a[href^="#"] {
 
 .quick-links a {
   text-decoration: none;
-  color: #084c62;
-  border: 1px solid #7faab8;
-  background: rgba(10, 93, 122, 0.1);
+  color: var(--accent);
+  border: 1px solid #9fc0cc;
+  background: rgba(10, 93, 122, 0.04);
   border-radius: 999px;
   padding: 0.25rem 0.55rem;
   font-size: 0.82rem;
@@ -162,7 +162,7 @@ nav a[href^="#"] {
 }
 
 .quick-links a:hover {
-  background: rgba(10, 93, 122, 0.18);
+  background: rgba(10, 93, 122, 0.1);
 }
 
 .content {
@@ -172,7 +172,7 @@ nav a[href^="#"] {
 
 .panel {
   background: var(--panel);
-  border: 1px solid #c8dce3;
+  border: 1px solid #d5e2e7;
   border-radius: 20px;
   box-shadow: var(--shadow);
   padding: 1.8rem;
@@ -198,8 +198,8 @@ a {
 .chips li {
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  background: #cfe7ee;
-  color: #083f51;
+  background: var(--accent-soft);
+  color: #0c455b;
 }
 
 .pub-list {
@@ -242,19 +242,19 @@ a {
 .projects-group + .projects-group {
   margin-top: 2rem;
   padding-top: 1.2rem;
-  border-top: 1px solid #bed7df;
+  border-top: 1px solid #d7e6eb;
 }
 
 .pub-group h3,
 .projects-group h3 {
   margin: 0.2rem 0 0.8rem;
   font-size: 1.65rem;
-  color: #0a5d7a;
+  color: #0f5b74;
 }
 
 .pub-list.full li,
 .projects-list li {
-  border-left: 3px solid #7faab8;
+  border-left: 2px solid #96bcc8;
   padding-left: 0.8rem;
 }
 
@@ -283,12 +283,12 @@ a {
 .project-status {
   display: inline-block;
   margin-top: 0.35rem;
-  border: 1px solid #7faab8;
+  border: 1px solid #9fc0cc;
   border-radius: 999px;
   padding: 0.08rem 0.5rem;
   font-size: 0.78rem;
-  color: #0a546c;
-  background: rgba(10, 93, 122, 0.12);
+  color: #245a6f;
+  background: rgba(10, 93, 122, 0.05);
 }
 
 .pub-links {
@@ -298,7 +298,7 @@ a {
 
 .pub-links a {
   text-decoration: none;
-  border: 1px solid #7faab8;
+  border: 1px solid #9fc0cc;
   border-radius: 999px;
   padding: 0.16rem 0.6rem;
   font-size: 0.82rem;
@@ -310,7 +310,7 @@ a {
 }
 
 .teaching-list article {
-  border: 1px solid #c8dce3;
+  border: 1px solid #d5e2e7;
   border-radius: 14px;
   padding: 0.9rem 1rem;
   background: #fbfcfd;
@@ -319,7 +319,7 @@ a {
 .teaching-list h3 {
   margin: 0 0 0.55rem;
   font-size: 1.25rem;
-  color: #0a5d7a;
+  color: var(--accent);
 }
 
 .teaching-item {
