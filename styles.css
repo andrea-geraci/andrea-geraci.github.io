@@ -54,8 +54,8 @@ body {
   position: sticky;
   top: 1rem;
   align-self: start;
-  background: linear-gradient(165deg, #ffffff 0%, #f5f8fb 100%);
-  border: 1px solid var(--line);
+  background: linear-gradient(165deg, #ffffff 0%, #eef6f8 100%);
+  border: 1px solid #cfe0e6;
   border-radius: 20px;
   box-shadow: var(--shadow);
   padding: 1.6rem;
@@ -94,6 +94,7 @@ h1 {
 h2 {
   margin: 0.2rem 0 1rem;
   font-size: 2.1rem;
+  color: #114d62;
 }
 
 .role {
@@ -136,6 +137,10 @@ nav a:hover {
   color: var(--accent);
 }
 
+nav a[href^="#"] {
+  transition: color 0.18s ease;
+}
+
 .quick-links {
   display: flex;
   gap: 0.35rem;
@@ -147,12 +152,17 @@ nav a:hover {
 .quick-links a {
   text-decoration: none;
   color: var(--accent);
-  border: 1px solid #bbd0d9;
+  border: 1px solid #9fc0cc;
+  background: rgba(10, 93, 122, 0.04);
   border-radius: 999px;
   padding: 0.25rem 0.55rem;
   font-size: 0.82rem;
   line-height: 1.1;
   white-space: nowrap;
+}
+
+.quick-links a:hover {
+  background: rgba(10, 93, 122, 0.1);
 }
 
 .content {
@@ -162,7 +172,7 @@ nav a:hover {
 
 .panel {
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid #d5e2e7;
   border-radius: 20px;
   box-shadow: var(--shadow);
   padding: 1.8rem;
@@ -232,18 +242,19 @@ a {
 .projects-group + .projects-group {
   margin-top: 2rem;
   padding-top: 1.2rem;
-  border-top: 1px solid #e3eaee;
+  border-top: 1px solid #d7e6eb;
 }
 
 .pub-group h3,
 .projects-group h3 {
   margin: 0.2rem 0 0.8rem;
   font-size: 1.65rem;
+  color: #0f5b74;
 }
 
 .pub-list.full li,
 .projects-list li {
-  border-left: 2px solid #d4e4ea;
+  border-left: 2px solid #96bcc8;
   padding-left: 0.8rem;
 }
 
@@ -272,11 +283,12 @@ a {
 .project-status {
   display: inline-block;
   margin-top: 0.35rem;
-  border: 1px solid #bbd0d9;
+  border: 1px solid #9fc0cc;
   border-radius: 999px;
   padding: 0.08rem 0.5rem;
   font-size: 0.78rem;
   color: #245a6f;
+  background: rgba(10, 93, 122, 0.05);
 }
 
 .pub-links {
@@ -286,7 +298,7 @@ a {
 
 .pub-links a {
   text-decoration: none;
-  border: 1px solid #bbd0d9;
+  border: 1px solid #9fc0cc;
   border-radius: 999px;
   padding: 0.16rem 0.6rem;
   font-size: 0.82rem;
@@ -298,7 +310,7 @@ a {
 }
 
 .teaching-list article {
-  border: 1px solid var(--line);
+  border: 1px solid #d5e2e7;
   border-radius: 14px;
   padding: 0.9rem 1rem;
   background: #fbfcfd;
