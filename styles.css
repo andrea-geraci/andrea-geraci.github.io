@@ -1,44 +1,43 @@
 :root {
   --bg: #f7f8f6;
-  gap: 0.7rem;
+  --panel: #ffffff;
   --ink: #1f2a33;
   --muted: #64707a;
   --accent: #0a5d7a;
   --accent-soft: #dcebf1;
   --line: #d7dee3;
-  padding: 0.9rem 1rem;
+  --shadow: 0 18px 45px rgba(26, 40, 50, 0.08);
 }
 
 * {
   box-sizing: border-box;
-  margin: 0 0 0.55rem;
-  font-size: 1.25rem;
-  color: var(--accent);
-html {
-  scroll-behavior: smooth;
-.teaching-item {
-  font-size: 0.97rem;
-  line-height: 1.45;
-  color: var(--ink);
 }
 
-.teaching-item + .teaching-item {
-  margin-top: 0.35rem;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   margin: 0;
   font-family: "Source Sans 3", sans-serif;
-@media (max-width: 960px) {
-  .shell {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-card {
-    position: static;
-  }
-
-  .teaching-grid {
-    grid-template-columns: 1fr;
-  }
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, #edf4f7 0%, transparent 40%),
     radial-gradient(circle at 90% 25%, #f6efe4 0%, transparent 36%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(to right, rgba(10, 93, 122, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 93, 122, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
 }
 
 .shell {
@@ -92,6 +91,11 @@ h1 {
   font-size: 2.1rem;
 }
 
+h2 {
+  margin: 0.2rem 0 1rem;
+  font-size: 2.1rem;
+}
+
 .role {
   margin: 0;
   color: var(--accent);
@@ -101,6 +105,7 @@ h1 {
 .affiliation {
   color: var(--muted);
   margin-top: 0.8rem;
+  line-height: 1.5;
 }
 
 nav ul {
@@ -156,22 +161,12 @@ nav a:hover {
   padding: 1.8rem;
 }
 
-.kicker {
-  margin: 0;
-  color: var(--accent);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
-h2 {
-  margin: 0.2rem 0 1rem;
-  font-size: 2.1rem;
-}
-
 p {
   line-height: 1.65;
+}
+
+a {
+  color: var(--accent);
 }
 
 .chips {
@@ -216,33 +211,33 @@ p {
   font-style: italic;
 }
 
-.pub-title {
-  display: block;
-  font-weight: 600;
-}
-
 .pub-meta,
 .note {
   color: var(--muted);
 }
 
-.publications-content {
-  min-height: 80px;
-}
-
+.publications-content,
 .current-projects-content {
   min-height: 80px;
 }
 
+.pub-group + .pub-group,
 .projects-group + .projects-group {
-  margin-top: 1.6rem;
-  padding-top: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.2rem;
   border-top: 1px solid #e3eaee;
 }
 
+.pub-group h3,
 .projects-group h3 {
   margin: 0.2rem 0 0.8rem;
   font-size: 1.65rem;
+}
+
+.pub-list.full li,
+.projects-list li {
+  border-left: 2px solid #d4e4ea;
+  padding-left: 0.8rem;
 }
 
 .projects-list {
@@ -252,8 +247,6 @@ p {
 
 .projects-list li {
   margin-bottom: 1rem;
-  border-left: 2px solid #d4e4ea;
-  padding-left: 0.8rem;
 }
 
 .project-title {
@@ -279,22 +272,6 @@ p {
   color: #245a6f;
 }
 
-.pub-group + .pub-group {
-  margin-top: 2rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid #e3eaee;
-}
-
-.pub-group h3 {
-  margin: 0.2rem 0 0.8rem;
-  font-size: 1.65rem;
-}
-
-.pub-list.full li {
-  border-left: 2px solid #d4e4ea;
-  padding-left: 0.8rem;
-}
-
 .pub-links {
   display: inline-flex;
   margin-top: 0.3rem;
@@ -308,48 +285,32 @@ p {
   font-size: 0.82rem;
 }
 
-.teaching-grid {
-  display: grid;
-  gap: 0.8rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.teaching-grid article {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 1rem;
-  background: #fbfcfd;
-}
-
 .teaching-list {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.7rem;
 }
 
 .teaching-list article {
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 1rem;
+  padding: 0.9rem 1rem;
   background: #fbfcfd;
 }
 
 .teaching-list h3 {
-  margin: 0 0 0.6rem;
-  font-size: 1.45rem;
-}
-
-.teaching-list ul {
-  margin: 0;
-  padding-left: 1.2rem;
-}
-
-.teaching-list li {
-  margin-bottom: 0.45rem;
-  line-height: 1.45;
-}
-
-a {
+  margin: 0 0 0.55rem;
+  font-size: 1.25rem;
   color: var(--accent);
+}
+
+.teaching-item {
+  font-size: 0.97rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.teaching-item + .teaching-item {
+  margin-top: 0.35rem;
 }
 
 .reveal {
@@ -388,9 +349,5 @@ a {
 
   .profile-card {
     position: static;
-  }
-
-  .teaching-grid {
-    grid-template-columns: 1fr;
   }
 }
