@@ -148,48 +148,15 @@ function publicationCategory(pub) {
   if (pub.keywords.includes("journal")) {
     return "journal";
   }
-  if (pub.keywords.includes("policy")) {
-    return "policy";
-  }
-  if (pub.keywords.includes("bookchapter")) {
-    return "bookchapter";
+  if (
+    pub.keywords.includes("workingpaper") ||
+    pub.keywords.includes("workinprogress") ||
+    pub.keywords.includes("wip") ||
+    pub.keywords.includes("working")
+  ) {
+    return "working";
   }
   return "other";
-}
-
-function renderResearchStats(entries) {
-  const statsEl = document.getElementById("research-stats");
-  const recentEl = document.getElementById("recent-pubs");
-  if (!statsEl || !recentEl) {
-    return;
-  }
-
-  const journalCount = entries.filter((entry) => publicationCategory(entry) === "journal").length;
-  const policyCount = entries.filter((entry) => publicationCategory(entry) === "policy").length;
-  const totalCount = entries.length;
-
-  statsEl.innerHTML = `
-    <div class="stat-card"><strong>${totalCount}</strong><span>Total publications</span></div>
-    <div class="stat-card"><strong>${journalCount}</strong><span>Journal articles</span></div>
-    <div class="stat-card"><strong>${policyCount}</strong><span>Policy reports</span></div>
-  `;
-
-  const latest = entries.slice(0, 4);
-  const latestItems = latest
-    .map(
-      (entry) => `
-        <li>
-          <span class="pub-title">${entry.title}</span>
-          <span class="pub-meta">${entry.year} - ${entry.journal}</span>
-        </li>
-      `
-    )
-    .join("");
-
-  recentEl.innerHTML = `
-    <h3>Latest publications</h3>
-    <ol class="pub-list">${latestItems}</ol>
-  `;
 }
 
 function renderPublications(entries) {
@@ -223,7 +190,10 @@ function renderPublications(entries) {
     .join("");
 
   const journalEntries = entries.filter((entry) => publicationCategory(entry) === "journal");
-  const otherEntries = entries.filter((entry) => publicationCategory(entry) !== "journal");
+  const workingEntries = entries.filter((entry) => publicationCategory(entry) === "working");
+  const otherEntries = entries.filter(
+    (entry) => publicationCategory(entry) !== "journal" && publicationCategory(entry) !== "working"
+  );
 
   const journalHtml = journalEntries.length
     ? `<ol class="pub-list full">${renderList(journalEntries)}</ol>`
@@ -233,6 +203,10 @@ function renderPublications(entries) {
     ? `<ol class="pub-list full">${renderList(otherEntries)}</ol>`
     : "<p class=\"note\">No other contributions yet.</p>";
 
+  const workingHtml = workingEntries.length
+    ? `<ol class="pub-list full">${renderList(workingEntries)}</ol>`
+    : "<p class=\"note\">No working papers or work in progress yet.</p>";
+
   contentEl.innerHTML = `
     <section class="pub-group">
       <h3>Journal Articles</h3>
@@ -241,6 +215,10 @@ function renderPublications(entries) {
     <section class="pub-group">
       <h3>Other Contributions</h3>
       ${otherHtml}
+    </section>
+    <section class="pub-group">
+      <h3>Working Papers & Work in Progress</h3>
+      ${workingHtml}
     </section>
   `;
 }
@@ -260,16 +238,11 @@ async function loadPublications() {
     const bibText = await response.text();
     const entries = parseBibTex(bibText);
 
-    renderResearchStats(entries);
     renderPublications(entries);
   } catch (error) {
     const message = "Unable to load publications.bib. Check file path and format.";
     if (contentEl) {
       contentEl.innerHTML = `<p class=\"note\">${message}</p>`;
-    }
-    const statsEl = document.getElementById("research-stats");
-    if (statsEl) {
-      statsEl.innerHTML = `<p class=\"note\">${message}</p>`;
     }
   }
 }

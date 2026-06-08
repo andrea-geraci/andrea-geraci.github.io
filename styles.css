@@ -181,38 +181,6 @@ p {
   color: #0c455b;
 }
 
-.research-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin: 1rem 0;
-}
-
-.stat-card {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #fbfcfd;
-  padding: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.stat-card strong {
-  font-size: 1.2rem;
-  color: var(--accent);
-}
-
-.stat-card span {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.recent-pubs h3 {
-  margin: 0.3rem 0 0.7rem;
-  font-size: 1.6rem;
-}
-
 .pub-list {
   margin: 0;
   padding-left: 1.2rem;
@@ -319,10 +287,6 @@ a {
   }
 
   .teaching-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .research-stats {
     grid-template-columns: 1fr;
   }
 }
