@@ -224,6 +224,17 @@ p {
   min-height: 80px;
 }
 
+.projects-group + .projects-group {
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e3eaee;
+}
+
+.projects-group h3 {
+  margin: 0.2rem 0 0.8rem;
+  font-size: 1.65rem;
+}
+
 .projects-list {
   margin: 0;
   padding-left: 1.2rem;
@@ -239,6 +250,23 @@ p {
   display: block;
   color: var(--ink);
   line-height: 1.6;
+}
+
+.project-description {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.2rem;
+  line-height: 1.55;
+}
+
+.project-status {
+  display: inline-block;
+  margin-top: 0.35rem;
+  border: 1px solid #bbd0d9;
+  border-radius: 999px;
+  padding: 0.08rem 0.5rem;
+  font-size: 0.78rem;
+  color: #245a6f;
 }
 
 .pub-group + .pub-group {

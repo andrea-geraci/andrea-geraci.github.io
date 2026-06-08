@@ -204,6 +204,23 @@ function publicationCategory(pub) {
   return "other";
 }
 
+function normalizeManualProjects(data) {
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  return data
+    .map((item) => ({
+      topic: (item.topic || "").trim(),
+      description: (item.description || "").trim(),
+      status: (item.status || "").trim(),
+      collaborators: Array.isArray(item.collaborators)
+        ? item.collaborators.map((c) => String(c).trim()).filter(Boolean)
+        : [],
+    }))
+    .filter((item) => item.topic || item.description);
+}
+
 function projectCoauthors(entry) {
   const coauthors = (entry.authors || []).filter(
     (name) => name.toLowerCase() !== "andrea geraci"
@@ -286,19 +303,33 @@ function renderPublications(entries) {
   `;
 }
 
-function renderCurrentProjects(entries) {
+function renderCurrentProjects(entries, manualProjects) {
   const projectsEl = document.getElementById("current-projects-content");
   if (!projectsEl) {
     return;
   }
 
   const workingEntries = entries.filter((entry) => publicationCategory(entry) === "working");
-  if (workingEntries.length === 0) {
+  if (workingEntries.length === 0 && manualProjects.length === 0) {
     projectsEl.innerHTML = "<p class=\"note\">No current projects listed yet.</p>";
     return;
   }
 
-  const items = workingEntries
+  const manualItems = manualProjects
+    .map((project) => {
+      const collaborators = project.collaborators.join(", ");
+      return `
+        <li>
+          <span class="project-title">${project.topic}</span>
+          ${collaborators ? `<span class="pub-meta">with ${collaborators}</span>` : ""}
+          ${project.description ? `<span class="project-description">${project.description}</span>` : ""}
+          ${project.status ? `<span class="project-status">${project.status}</span>` : ""}
+        </li>
+      `;
+    })
+    .join("");
+
+  const workingItems = workingEntries
     .map((entry) => {
       const withCoauthors = projectCoauthors(entry);
       return `
@@ -310,7 +341,35 @@ function renderCurrentProjects(entries) {
     })
     .join("");
 
-  projectsEl.innerHTML = `<ul class="projects-list">${items}</ul>`;
+  const manualHtml = manualItems
+    ? `
+      <section class="projects-group">
+        <h3>Ongoing Projects</h3>
+        <ul class="projects-list">${manualItems}</ul>
+      </section>
+    `
+    : "";
+
+  const workingHtml = workingItems
+    ? `
+      <section class="projects-group">
+        <h3>Working Papers</h3>
+        <ul class="projects-list">${workingItems}</ul>
+      </section>
+    `
+    : "";
+
+  projectsEl.innerHTML = `${manualHtml}${workingHtml}`;
+}
+
+async function loadManualProjects() {
+  const response = await fetch("current-projects.json", { cache: "no-store" });
+  if (!response.ok) {
+    return [];
+  }
+
+  const data = await response.json();
+  return normalizeManualProjects(data);
 }
 
 async function loadPublications() {
@@ -320,16 +379,23 @@ async function loadPublications() {
   }
 
   try {
-    const response = await fetch("publications.bib", { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`Failed to fetch publications.bib (${response.status})`);
+    const bibResponse = await fetch("publications.bib", { cache: "no-store" });
+    if (!bibResponse.ok) {
+      throw new Error(`Failed to fetch publications.bib (${bibResponse.status})`);
     }
 
-    const bibText = await response.text();
+    const bibText = await bibResponse.text();
     const entries = parseBibTex(bibText);
+    let manualProjects = [];
+
+    try {
+      manualProjects = await loadManualProjects();
+    } catch (error) {
+      manualProjects = [];
+    }
 
     renderPublications(entries);
-    renderCurrentProjects(entries);
+    renderCurrentProjects(entries, manualProjects);
   } catch (error) {
     const message = "Unable to load publications.bib. Check file path and format.";
     if (contentEl) {
