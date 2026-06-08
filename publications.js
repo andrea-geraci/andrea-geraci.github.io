@@ -373,12 +373,7 @@ function renderCurrentProjects(entries, manualProjects) {
     .join("");
 
   const manualHtml = manualItems
-    ? `
-      <section class="projects-group">
-        <h3>Ongoing Projects</h3>
-        <ul class="projects-list">${manualItems}</ul>
-      </section>
-    `
+    ? `<ul class="projects-list">${manualItems}</ul>`
     : "";
 
   const workingHtml = workingItems
