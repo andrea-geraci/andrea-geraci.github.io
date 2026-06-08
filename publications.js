@@ -362,8 +362,13 @@ function renderCurrentProjects(entries, manualProjects) {
   projectsEl.innerHTML = `${manualHtml}${workingHtml}`;
 }
 
+function withCacheBust(path) {
+  const token = Date.now();
+  return `${path}?v=${token}`;
+}
+
 async function loadManualProjects() {
-  const response = await fetch("current-projects.json", { cache: "no-store" });
+  const response = await fetch(withCacheBust("current-projects.json"), { cache: "no-store" });
   if (!response.ok) {
     return [];
   }
@@ -379,7 +384,7 @@ async function loadPublications() {
   }
 
   try {
-    const bibResponse = await fetch("publications.bib", { cache: "no-store" });
+    const bibResponse = await fetch(withCacheBust("publications.bib"), { cache: "no-store" });
     if (!bibResponse.ok) {
       throw new Error(`Failed to fetch publications.bib (${bibResponse.status})`);
     }
