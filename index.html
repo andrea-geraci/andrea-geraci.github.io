@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andrea Geraci | Academic Website</title>
+    <meta
+      name="description"
+      content="Andrea Geraci - Associate Professor at the University of Pavia. Research, publications, teaching and contact information."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="shell">
+      <aside class="profile-card">
+        <div class="profile-photo" aria-hidden="true">AG</div>
+        <h1>Andrea Geraci</h1>
+        <p class="role">Associate Professor</p>
+        <p class="affiliation">
+          Department of Economics and Management<br />
+          University of Pavia
+        </p>
+
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="quick-links">
+          <a href="https://scholar.google.com/scholar?q=Andrea+Geraci" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">Scholar</a>
+          <a href="https://sites.google.com/view/andreageraci/home" target="_blank" rel="noopener noreferrer" aria-label="Curriculum Vitae">CV</a>
+          <a href="https://ideas.repec.org/cgi-bin/htsearch?q=Andrea+Geraci" target="_blank" rel="noopener noreferrer" aria-label="RePEc">RePEc</a>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section id="about" class="panel reveal">
+          <p class="kicker">Welcome</p>
+          <h2>About</h2>
+          <p>
+            I am Andrea Geraci, Associate Professor at the Department of
+            Economics and Management of the University of Pavia.
+          </p>
+          <p>
+            Before joining the University of Pavia, I worked as a research
+            economist at the Competence Centre for Microeconomic Evaluation of
+            the European Commission's Joint Research Centre.
+          </p>
+        </section>
+
+        <section id="research" class="panel reveal">
+          <p class="kicker">Focus Areas</p>
+          <h2>Research</h2>
+          <ul class="chips">
+            <li>Applied Microeconomics</li>
+            <li>Policy Evaluation</li>
+            <li>Labour Economics</li>
+            <li>Econometrics</li>
+          </ul>
+          <div class="research-stats" id="research-stats"></div>
+          <div class="recent-pubs" id="recent-pubs"></div>
+        </section>
+
+        <section id="publications" class="panel reveal">
+          <p class="kicker">Publications</p>
+          <h2>Publications</h2>
+          <p class="note">
+            This list is generated from <a href="publications.bib">publications.bib</a>.
+            Update that file to keep this page in sync.
+          </p>
+          <div id="publications-content" class="publications-content"></div>
+        </section>
+
+        <section id="teaching" class="panel reveal">
+          <p class="kicker">Courses</p>
+          <h2>Teaching</h2>
+          <div class="teaching-grid">
+            <article>
+              <h3>Course Name</h3>
+              <p>University of Pavia</p>
+              <p>Short description, syllabus and materials link.</p>
+            </article>
+            <article>
+              <h3>Course Name</h3>
+              <p>University of Pavia</p>
+              <p>Short description, syllabus and materials link.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="panel reveal">
+          <p class="kicker">Get in Touch</p>
+          <h2>Contact</h2>
+          <p>
+            Department of Economics and Management, University of Pavia,
+            Pavia, Italy
+          </p>
+          <p>
+            Email:
+            <a href="mailto:andrea.geraci@unipv.it">andrea.geraci@unipv.it</a>
+          </p>
+        </section>
+      </main>
+    </div>
+    <script src="publications.js" defer></script>
+  </body>
+</html>
