@@ -204,6 +204,13 @@ function publicationCategory(pub) {
   return "other";
 }
 
+function projectCoauthors(entry) {
+  const coauthors = (entry.authors || []).filter(
+    (name) => name.toLowerCase() !== "andrea geraci"
+  );
+  return coauthors.join(", ");
+}
+
 function renderPublications(entries) {
   const contentEl = document.getElementById("publications-content");
   if (!contentEl) {
@@ -255,7 +262,6 @@ function renderPublications(entries) {
     .join("");
 
   const journalEntries = entries.filter((entry) => publicationCategory(entry) === "journal");
-  const workingEntries = entries.filter((entry) => publicationCategory(entry) === "working");
   const otherEntries = entries.filter(
     (entry) => publicationCategory(entry) !== "journal" && publicationCategory(entry) !== "working"
   );
@@ -268,10 +274,6 @@ function renderPublications(entries) {
     ? `<ol class="pub-list full">${renderList(otherEntries)}</ol>`
     : "<p class=\"note\">No other contributions yet.</p>";
 
-  const workingHtml = workingEntries.length
-    ? `<ol class="pub-list full">${renderList(workingEntries)}</ol>`
-    : "<p class=\"note\">No working papers or work in progress yet.</p>";
-
   contentEl.innerHTML = `
     <section class="pub-group">
       <h3>Journal Articles</h3>
@@ -281,11 +283,34 @@ function renderPublications(entries) {
       <h3>Other Contributions</h3>
       ${otherHtml}
     </section>
-    <section class="pub-group">
-      <h3>Working Papers & Work in Progress</h3>
-      ${workingHtml}
-    </section>
   `;
+}
+
+function renderCurrentProjects(entries) {
+  const projectsEl = document.getElementById("current-projects-content");
+  if (!projectsEl) {
+    return;
+  }
+
+  const workingEntries = entries.filter((entry) => publicationCategory(entry) === "working");
+  if (workingEntries.length === 0) {
+    projectsEl.innerHTML = "<p class=\"note\">No current projects listed yet.</p>";
+    return;
+  }
+
+  const items = workingEntries
+    .map((entry) => {
+      const withCoauthors = projectCoauthors(entry);
+      return `
+        <li>
+          <span class="project-title">${entry.title}</span>
+          ${withCoauthors ? `<span class="pub-meta">with ${withCoauthors}</span>` : ""}
+        </li>
+      `;
+    })
+    .join("");
+
+  projectsEl.innerHTML = `<ul class="projects-list">${items}</ul>`;
 }
 
 async function loadPublications() {
@@ -304,10 +329,16 @@ async function loadPublications() {
     const entries = parseBibTex(bibText);
 
     renderPublications(entries);
+    renderCurrentProjects(entries);
   } catch (error) {
     const message = "Unable to load publications.bib. Check file path and format.";
     if (contentEl) {
       contentEl.innerHTML = `<p class=\"note\">${message}</p>`;
+    }
+
+    const projectsEl = document.getElementById("current-projects-content");
+    if (projectsEl) {
+      projectsEl.innerHTML = `<p class=\"note\">${message}</p>`;
     }
   }
 }

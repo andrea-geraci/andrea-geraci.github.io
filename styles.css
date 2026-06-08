@@ -220,6 +220,27 @@ p {
   min-height: 80px;
 }
 
+.current-projects-content {
+  min-height: 80px;
+}
+
+.projects-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.projects-list li {
+  margin-bottom: 1rem;
+  border-left: 2px solid #d4e4ea;
+  padding-left: 0.8rem;
+}
+
+.project-title {
+  display: block;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
 .pub-group + .pub-group {
   margin-top: 2rem;
   padding-top: 1.2rem;
